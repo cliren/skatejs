@@ -4,10 +4,15 @@ import helpers from '../lib/helpers';
 import attributes from '../../src/attributes';
 
 describe('Attribute listeners', function () {
+  var div;
+
+  beforeEach(function () {
+    div = document.createElement('div');
+  });
+
   it('should listen to changes in specified attributes', function (done) {
     var created = false;
     var updated = false;
-    var div = document.createElement('div');
 
     attributes({
       open: {
@@ -35,8 +40,6 @@ describe('Attribute listeners', function () {
   });
 
   it('should accept a function insead of an object for a particular attribute definition.', function (done) {
-    var div = document.createElement('div');
-
     attributes({
       open: function (element, data) {
         if (data.type === 'created') {
@@ -54,8 +57,6 @@ describe('Attribute listeners', function () {
   });
 
   it('should accept a function insead of an object for the entire attribute definition.', function (done) {
-    var div = document.createElement('div');
-
     attributes(function (element, data) {
       if (data.type === 'created') {
         setTimeout(function () {
@@ -74,9 +75,7 @@ describe('Attribute listeners', function () {
     div.setAttribute('open', 'created');
   });
 
-  it('should ensure an attribute exists before trying to action it just in case another attribute handler removes it', function () {
-    var div = document.createElement('div');
-
+  it('should ensure an attribute exists before trying to action it just in case another attribute handler removes it', function (done) {
     attributes(function (element, data) {
       if (data.name === 'first') {
         element.removeAttribute('second');
@@ -89,12 +88,12 @@ describe('Attribute listeners', function () {
     helpers.afterMutations(function () {
       div.hasAttribute('first').should.equal(true);
       div.hasAttribute('second').should.equal(false);
+      done();
     });
   });
 
-  it('should ensure attributes are initialised', function () {
+  it('should ensure attributes are initialised', function (done) {
     var called = false;
-    var div = document.createElement('div');
 
     attributes(function () {
       called = true;
@@ -104,12 +103,12 @@ describe('Attribute listeners', function () {
 
     helpers.afterMutations(function () {
       expect(called).to.equal(true);
+      done();
     });
   });
 
-  it('should iterate over every attribute even if one removed while it is still being processed', function () {
+  it('should iterate over every attribute even if one removed while it is still being processed', function (done) {
     var attributesCalled = 0;
-    var div = document.createElement('div');
 
     attributes({
       id: {
@@ -131,6 +130,7 @@ describe('Attribute listeners', function () {
 
     helpers.afterMutations(function () {
       expect(attributesCalled).to.equal(2);
+      done();
     });
   });
 });
