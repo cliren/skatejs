@@ -2,6 +2,7 @@
 
 import attributes from './attributes';
 import chain from './chain';
+import defaults from './defaults';
 import documentObserver from './document-observer';
 import events from './events';
 import {
@@ -9,6 +10,7 @@ import {
   initElements
 } from './lifecycle';
 import registry from './registry';
+import types from './types';
 import {
   debounce,
   inherit
@@ -126,53 +128,17 @@ skate.init = function (nodes) {
   return nodes;
 };
 
-// Restriction type constants.
-skate.types = {
-  ANY: 'act',
-  ATTR: 'a',
-  CLASS: 'c',
-  NOATTR: 'ct',
-  NOCLASS: 'at',
-  NOTAG: 'ac',
-  TAG: 't'
-};
 
-// Makes checking the version easy when debugging.
-skate.version = version;
-
-/**
- * The default options for a definition.
- *
- * @var {Object}
- */
-skate.defaults = {
-  // Restricts a particular definition to binding explicitly to an element with
-  // a tag name that matches the specified value.
-  extends: '',
-
-  // The ID of the definition. This is automatically set in the `skate()`
-  // function.
-  id: '',
-
-  // Properties and methods to add to each element.
-  prototype: {},
-
-  // The attribute name to add after calling the created() callback.
-  resolvedAttribute: 'resolved',
-
-  // The type of bindings to allow.
-  type: skate.types.ANY,
-
-  // The attribute name to remove after calling the created() callback.
-  unresolvedAttribute: 'unresolved'
-};
 
 // Exporting
 // ---------
 
 skate.attributes = attributes;
 skate.chain = chain;
+skate.defaults = defaults;
 skate.events = events;
+skate.types = types;
+skate.version = version;
 
 // Always export the global. We don't know how consumers are using it and what
 // their environments are like. Doing this affords them the flexibility of
