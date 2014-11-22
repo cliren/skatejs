@@ -1,6 +1,9 @@
 'use strict';
 
+import attributes from './attributes';
+import chain from './chain';
 import documentObserver from './document-observer';
+import events from './events';
 import {
   triggerCreated,
   initElements
@@ -166,6 +169,10 @@ skate.defaults = {
 
 // Exporting
 // ---------
+
+skate.attributes = attributes;
+skate.chain = chain;
+skate.events = events;
 
 // Always export the global. We don't know how consumers are using it and what
 // their environments are like. Doing this affords them the flexibility of
