@@ -3,6 +3,7 @@
 import './lib/polyfills';
 import './unit/bootstrap';
 import './unit/attributes';
+import './unit/chain';
 import './unit/components';
 import './unit/document-observer';
 import './unit/dom';
