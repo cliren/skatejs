@@ -2,6 +2,15 @@
 
 import { initElements } from './lifecycle';
 
+/**
+ * Synchronously initialises the specified element or elements and
+ * descendants.
+ *
+ * @param {Mixed} nodes The node, or nodes to initialise. Can be anything:
+ *                      jQuery, DOMNodeList, DOMNode, selector etc.
+ *
+ * @returns {skate}
+ */
 export default function (nodes) {
   if (!nodes) {
     return;

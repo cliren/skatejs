@@ -106,16 +106,6 @@ function skate (id, definition) {
   }
 }
 
-/**
- * Synchronously initialises the specified element or elements and
- * descendants.
- *
- * @param {Mixed} nodes The node, or nodes to initialise. Can be anything:
- *                      jQuery, DOMNodeList, DOMNode, selector etc.
- *
- * @returns {skate}
- */
-skate.init = init;
 
 
 
@@ -126,6 +116,7 @@ skate.attributes = attributes;
 skate.chain = chain;
 skate.defaults = defaults;
 skate.events = events;
+skate.init = init;
 skate.types = types;
 skate.version = version;
 
