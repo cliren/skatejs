@@ -1,7 +1,6 @@
 'use strict';
 
 import helpers from '../lib/helpers';
-import skate from '../../src/skate';
 import attributes from '../../src/attributes';
 
 describe('Attribute listeners', function () {
