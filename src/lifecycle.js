@@ -40,10 +40,6 @@ function triggerCreated (target, component) {
 
   inherit(target, component.prototype, true);
 
-  if (component.template) {
-    component.template(target);
-  }
-
   if (component.created) {
     component.created(target);
   }

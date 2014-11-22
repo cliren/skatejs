@@ -143,13 +143,6 @@ skate.version = version;
  * @var {Object}
  */
 skate.defaults = {
-  // Attribute lifecycle callback or callbacks.
-  attributes: undefined,
-
-  // The events to manage the binding and unbinding of during the definition's
-  // lifecycle.
-  events: undefined,
-
   // Restricts a particular definition to binding explicitly to an element with
   // a tag name that matches the specified value.
   extends: '',
@@ -163,9 +156,6 @@ skate.defaults = {
 
   // The attribute name to add after calling the created() callback.
   resolvedAttribute: 'resolved',
-
-  // The template to replace the content of the element with.
-  template: undefined,
 
   // The type of bindings to allow.
   type: skate.types.ANY,
