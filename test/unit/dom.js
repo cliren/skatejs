@@ -86,8 +86,8 @@ describe('DOM', function () {
         '</svg>';
 
       skate('my-circle', {
-        prototype: {
-          skated: true
+        attached: function (element) {
+          element.skated = true;
         }
       });
 

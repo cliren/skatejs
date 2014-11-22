@@ -1,20 +1,23 @@
 'use strict';
 
 import helpers from '../lib/helpers';
-import skate from '../../src/skate';
+import events from '../../src/events';
 
 describe('Events', function () {
+  var div;
+
+  beforeEach(function () {
+    div = document.createElement('div');
+  });
+
   it('should bind events', function () {
     var numTriggered = 0;
-    var Div = skate('div', {
-      events: {
-        test: function () {
-          ++numTriggered;
-        }
-      }
-    });
 
-    var div = new Div();
+    events({
+      test: function () {
+        ++numTriggered;
+      }
+    })(div);
 
     helpers.dispatchEvent('test', div);
     expect(numTriggered).to.equal(1);
@@ -22,15 +25,12 @@ describe('Events', function () {
 
   it('should bind to the component element', function () {
     var numTriggered = 0;
-    var Div = skate('div', {
-      events: {
-        'test div' : function () {
-          ++numTriggered;
-        }
-      }
-    });
 
-    var div = new Div();
+    events({
+      'test div' : function () {
+        ++numTriggered;
+      }
+    })(div);
 
     helpers.dispatchEvent('test', div);
     expect(numTriggered).to.equal(1);
@@ -38,18 +38,15 @@ describe('Events', function () {
 
   it('should allow you to re-add the element back into the DOM', function () {
     var numTriggered = 0;
-    var Div = skate('div', {
-      events: {
-        test: function () {
-          ++numTriggered;
-        }
-      }
-    });
 
-    var div = new Div();
+    events({
+      test: function () {
+        ++numTriggered;
+      }
+    })(div);
+
     document.body.appendChild(div);
     var par = div.parentNode;
-
     par.removeChild(div);
     par.appendChild(div);
     helpers.dispatchEvent('test', div);
@@ -59,36 +56,32 @@ describe('Events', function () {
   it('should support delegate events', function () {
     var dispatched = 0;
 
-    skate('my-component', {
-      events: {
-        'click': function (element, e) {
-          ++dispatched;
-          expect(element.tagName).to.equal('MY-COMPONENT');
-          expect(e.target.tagName).to.equal('SPAN');
-        },
-
-        'click a': function (element, e, current) {
-          ++dispatched;
-          expect(element.tagName).to.equal('MY-COMPONENT');
-          expect(current.tagName).to.equal('A');
-          expect(e.target.tagName).to.equal('SPAN');
-        },
-        'click span': function (element, e) {
-          ++dispatched;
-          expect(element.tagName).to.equal('MY-COMPONENT');
-          expect(e.target.tagName).to.equal('SPAN');
-        }
+    events({
+      'click': function (element, e) {
+        ++dispatched;
+        expect(element.tagName).to.equal('DIV');
+        expect(e.target.tagName).to.equal('SPAN');
       },
-
-      template: function (element) {
-        element.innerHTML = '<a><span></span></a>';
+      'click a': function (element, e, current) {
+        ++dispatched;
+        expect(element.tagName).to.equal('DIV');
+        expect(current.tagName).to.equal('A');
+        expect(e.target.tagName).to.equal('SPAN');
+      },
+      'click span': function (element, e) {
+        ++dispatched;
+        expect(element.tagName).to.equal('DIV');
+        expect(e.target.tagName).to.equal('SPAN');
       }
-    });
+    })(div);
 
-    var inst = helpers.add('my-component');
+    var a = document.createElement('a');
+    var span = document.createElement('span');
 
-    skate.init(inst);
-    helpers.dispatchEvent('click', inst.querySelector('span'));
+    div.appendChild(a);
+    a.appendChild(span);
+
+    helpers.dispatchEvent('click', span);
     expect(dispatched).to.equal(3);
   });
 
@@ -96,38 +89,23 @@ describe('Events', function () {
     var blur = false;
     var focus = false;
 
-    skate('my-component', {
-      events: {
-        'blur input': function () {
-          blur = true;
-        },
-
-        'focus input': function () {
-          focus = true;
-        }
+    events({
+      'blur input': function () {
+        blur = true;
       },
 
-      prototype: {
-        blur: function () {
-          helpers.dispatchEvent('blur', this.querySelector('input'));
-        },
-
-        focus: function () {
-          helpers.dispatchEvent('focus', this.querySelector('input'));
-        }
-      },
-
-      template: function (element) {
-        element.innerHTML = '<input>';
+      'focus input': function () {
+        focus = true;
       }
-    });
+    })(div);
 
-    var inst = skate.init(helpers.add('my-component'));
+    var input = document.createElement('input');
+    div.appendChild(input);
 
-    inst.blur();
+    helpers.dispatchEvent('blur', input);
     expect(blur).to.equal(true);
 
-    inst.focus();
+    helpers.dispatchEvent('focus', input);
     expect(focus).to.equal(true);
   });
 });
