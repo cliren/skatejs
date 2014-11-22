@@ -5,6 +5,7 @@ import chain from './chain';
 import defaults from './defaults';
 import documentObserver from './document-observer';
 import events from './events';
+import init from './init';
 import {
   triggerCreated,
   initElements
@@ -114,19 +115,7 @@ function skate (id, definition) {
  *
  * @returns {skate}
  */
-skate.init = function (nodes) {
-  if (!nodes) {
-    return;
-  }
-
-  if (typeof nodes === 'string') {
-    nodes = document.querySelectorAll(nodes);
-  }
-
-  initElements(typeof nodes.length === 'undefined' ? [nodes] : nodes);
-
-  return nodes;
-};
+skate.init = init;
 
 
 

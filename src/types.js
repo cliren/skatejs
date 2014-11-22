@@ -1,3 +1,5 @@
+'use strict';
+
 export default {
   ANY: 'act',
   ATTR: 'a',
