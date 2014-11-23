@@ -1,9 +1,7 @@
 'use strict';
 
 import globals from './globals';
-import {
-  hasOwn
-} from './utils';
+import hasOwn from './has-own';
 
 /**
  * Returns the class list for the specified element.
@@ -38,11 +36,23 @@ function isDefinitionOfType (id, type) {
 }
 
 export default {
+  /**
+   * Clears everything from the registry.
+   *
+   * @returns {Object}
+   */
   clear: function () {
     globals.registry = {};
     return this;
   },
 
+  /**
+   * Returns the definitions that apply to the given element.
+   *
+   * @param {Element} element The elemtn to get the definitions for.
+   *
+   * @returns {Array}
+   */
   getForElement: function (element) {
     var attrs = element.attributes;
     var attrsLen = attrs.length;
@@ -99,10 +109,26 @@ export default {
     return definitions;
   },
 
+  /**
+   * Returns whether or not a definition is registered for the specified id.
+   *
+   * @param {String} id The definition id to check for.
+   *
+   * @returns {Boolean}
+   */
   has: function (id) {
     return hasOwn(globals.registry, id);
   },
 
+  /**
+   * Sets a definition in the registry if it does not already exist. If a
+   * definition by the same name already exists an error is thrown.
+   *
+   * @param {String} id The id to give the definition.
+   * @param {Object} definition The definition to register.
+   *
+   * @returns {Object}
+   */
   set: function (id, definition) {
     if (this.has(id)) {
       throw new Error('A definition of type "' + definition.type + '" with the ID of "' + id + '" already exists.');
@@ -113,6 +139,14 @@ export default {
     return this;
   },
 
+  /**
+   * Removes the definition registed with a matching id. If a definition is not
+   * registered then it doesn't do anything.
+   *
+   * @param {String} id The id of the definition to remove.
+   *
+   * @returns {Object}
+   */
   remove: function (id) {
     if (this.has(id)) {
       delete globals.registry[id];

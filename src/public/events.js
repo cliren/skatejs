@@ -1,6 +1,6 @@
 'use strict';
 
-import { objEach } from './utils';
+import objEach from '../private/obj-each';
 
 var elProto = window.HTMLElement.prototype;
 var matchesSelector = (

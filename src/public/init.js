@@ -1,6 +1,6 @@
 'use strict';
 
-import { initElements } from './lifecycle';
+import initElements from '../private/init-elements';
 
 /**
  * Synchronously initialises the specified element or elements and

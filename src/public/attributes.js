@@ -1,6 +1,6 @@
 'use strict';
 
-import MutationObserver from './mutation-observer';
+import MutationObserver from '../private/mutation-observer';
 
 /**
  * Binds attribute listeners for the specified attribute handlers.

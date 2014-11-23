@@ -1,7 +1,7 @@
 'use strict';
 
 import helpers from '../lib/helpers';
-import attributes from '../../src/attributes';
+import attributes from '../../src/public/attributes';
 
 describe('Attribute listeners', function () {
   var div;

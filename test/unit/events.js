@@ -1,7 +1,7 @@
 'use strict';
 
 import helpers from '../lib/helpers';
-import events from '../../src/events';
+import events from '../../src/public/events';
 
 describe('Events', function () {
   var div;

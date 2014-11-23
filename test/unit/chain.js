@@ -1,6 +1,6 @@
 'use strict';
 
-import chain from '../../src/chain';
+import chain from '../../src/public/chain';
 
 describe('Chaining', function () {
   it('should chain calls', function () {

@@ -1,14 +1,10 @@
 'use strict';
 
+import getClosestIgnoredElement from './get-closest-ignored-element';
 import globals from './globals';
-import {
-  initElements,
-  removeElements
-} from './lifecycle';
+import initElements from './init-elements';
 import MutationObserver from './mutation-observer';
-import {
-  getClosestIgnoredElement
-} from './utils';
+import removeElements from './remove-elements';
 
 /**
  * The document observer handler.

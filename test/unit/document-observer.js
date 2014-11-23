@@ -1,7 +1,7 @@
 'use strict';
 
-import globals from '../../src/globals';
-import observer from '../../src/document-observer';
+import globals from '../../src/private/globals';
+import observer from '../../src/private/document-observer';
 
 describe('Document Observer', function () {
   function getObserver () {

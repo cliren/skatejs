@@ -1,22 +1,19 @@
 'use strict';
 
-import attributes from './attributes';
-import chain from './chain';
-import defaults from './defaults';
-import documentObserver from './document-observer';
-import events from './events';
-import init from './init';
-import {
-  triggerCreated,
-  initElements
-} from './lifecycle';
-import registry from './registry';
-import types from './types';
-import {
-  debounce,
-  inherit
-} from './utils';
-import version from './version';
+import debounce from './private/debounce';
+import documentObserver from './private/document-observer';
+import inherit from './private/inherit';
+import initElements from './private/init-elements';
+import registry from './private/registry';
+import triggerCreated from './private/trigger-created';
+
+import attributes from './public/attributes';
+import chain from './public/chain';
+import defaults from './public/defaults';
+import events from './public/events';
+import init from './public/init';
+import types from './public/types';
+import version from './public/version';
 
 /**
  * Initialises all valid elements in the document. Ensures that it does not

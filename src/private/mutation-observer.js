@@ -1,9 +1,7 @@
 'use strict';
 
-import {
-  debounce,
-  objEach
-} from './utils';
+import debounce from './debounce';
+import objEach from './obj-each';
 
 var elProto = window.HTMLElement.prototype;
 var elProtoContains = window.HTMLElement.prototype.contains;
