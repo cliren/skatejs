@@ -14,3 +14,5 @@ import './unit/registration';
 import './unit/registry';
 import './unit/templating';
 import './unit/version';
+
+import './unit/regressions/gh-137';
